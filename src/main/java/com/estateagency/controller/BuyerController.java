@@ -52,7 +52,9 @@ public class BuyerController {
 
     @RequestMapping("/buyer/{id}/remove")
     public String removeBuyer(@PathVariable("id") int id){
-        this.buyerService.removeBuyer(id);
+        if(this.buyerService.removeBuyer(id)){
+            return "error";
+        }
 
         return "redirect:/buyers";
     }

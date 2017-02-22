@@ -1,5 +1,6 @@
 package com.estateagency.controller;
 
+import com.estateagency.dao.ContractDao;
 import com.estateagency.model.Flat;
 import com.estateagency.service.ContractService;
 import com.estateagency.service.FlatService;
@@ -55,8 +56,9 @@ public class FlatController {
 
     @RequestMapping("/flat/{id}/remove")
     public String removeFlat(@PathVariable("id") int id){
-        this.flatService.removeFlat(id);
-
+        if (!this.flatService.removeFlat(id)) {
+            return "error";
+        }
         return "redirect:/flats";
     }
 

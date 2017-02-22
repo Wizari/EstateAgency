@@ -9,7 +9,7 @@ public interface BuyerService {
 
     void updateBuyer(Buyer buyer);
 
-    void removeBuyer(int id);
+    boolean removeBuyer(int id);
 
     Buyer getBuyerById(int id);
 

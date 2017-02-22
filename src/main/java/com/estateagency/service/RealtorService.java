@@ -9,7 +9,7 @@ public interface RealtorService {
 
     void updateRealtor(Realtor realtor);
 
-    void removeRealtor(int id);
+    boolean removeRealtor(int id);
 
     Realtor getRealtorById(int id);
 

@@ -1,7 +1,10 @@
 package com.estateagency.service;
 
+import com.estateagency.dao.ContractDao;
 import com.estateagency.dao.RealtorDao;
+import com.estateagency.model.Contract;
 import com.estateagency.model.Realtor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +13,8 @@ import java.util.List;
 @Service
 public class RealtorServiceImpl implements RealtorService {
     private RealtorDao realtorDao;
+    @Autowired
+    private ContractDao contractDao;
 
     public void setRealtorDao(RealtorDao realtorDao) {
         this.realtorDao = realtorDao;
@@ -29,8 +34,13 @@ public class RealtorServiceImpl implements RealtorService {
 
     @Override
     @Transactional
-    public void removeRealtor(int id) {
+    public boolean removeRealtor(int id) {
+        List<Contract> contracts = this.contractDao.getContractByFlat(id);
+        if (contracts.size() > 0) {
+            return false;
+        }
         this.realtorDao.removeRealtor(id);
+        return true;
     }
 
     @Override

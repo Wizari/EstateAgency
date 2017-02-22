@@ -53,11 +53,34 @@ public class ContractDaoImpl implements ContractDao {
 
         return contract;
     }
-
     @Override
+    @SuppressWarnings("unchecked")
     public List<Contract> getContractByFlat(int flat) {
         Session session =this.sessionFactory.getCurrentSession();
         List<Contract> contracts = session.createQuery("from Contract where flats_id = " + flat).list();
+        return contracts;
+    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Contract> getContractByBuyer(int buyerId) {
+        Session session =this.sessionFactory.getCurrentSession();
+        List<Contract> contracts = session.createQuery("from Contract where buyers_id = " + buyerId).list();
+        return contracts;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Contract> getContractBySeller(int sellerId) {
+        Session session =this.sessionFactory.getCurrentSession();
+        List<Contract> contracts = session.createQuery("from Contract where sellers_id = " + sellerId).list();
+        return contracts;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Contract> getContractByRealtor(int realtorId) {
+        Session session =this.sessionFactory.getCurrentSession();
+        List<Contract> contracts = session.createQuery("from Contract where realtors_id = " + realtorId).list();
         return contracts;
     }
 

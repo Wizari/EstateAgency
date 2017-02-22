@@ -16,5 +16,14 @@ public interface ContractDao {
 
     List<Contract> getContractByFlat(int flatId);
 
+    @SuppressWarnings("unchecked")
+    List<Contract> getContractByBuyer(int buyerId);
+
+    @SuppressWarnings("unchecked")
+    List<Contract> getContractBySeller(int sellerId);
+
+    @SuppressWarnings("unchecked")
+    List<Contract> getContractByRealtor(int realtorId);
+
     List<Contract> listContracts();
 }

@@ -53,8 +53,9 @@ public class RealtorController {
 
     @RequestMapping("/realtor/{id}/remove")
     public String removeRealtor(@PathVariable("id") int id){
-        this.realtorService.removeRealtor(id);
-
+        if (this.realtorService.removeRealtor(id)) {
+            return "error";
+        }
         return "redirect:/realtors";
     }
 

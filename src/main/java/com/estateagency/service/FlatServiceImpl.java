@@ -36,12 +36,13 @@ public class FlatServiceImpl implements FlatService {
 
     @Override
     @Transactional
-    public void removeFlat(int id) {
+    public boolean removeFlat(int id) {
         List<Contract> contracts = this.contractDao.getContractByFlat(id);
         if (contracts.size() > 0) {
-            this.contractDao.removeContract(contracts.get(0).getId());
+            return false;
         }
         this.flatDao.removeFlat(id);
+        return true;
     }
 
     @Override
