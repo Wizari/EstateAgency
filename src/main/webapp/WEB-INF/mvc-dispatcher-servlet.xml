@@ -1,0 +1,109 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.estateagency"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- Database Information -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/estate_agency"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <!-- Hibernate 4 SessionFactory Bean definition -->
+    <bean id="hibernate4AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.estateagency.model.Seller</value>
+                <value>com.estateagency.model.Buyer</value>
+                <value>com.estateagency.model.Realtor</value>
+                <value>com.estateagency.model.Flat</value>
+                <value>com.estateagency.model.Contract</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+                </prop>
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <!--SellerDao and SellerService beans-->
+    <bean id="sellerDao" class="com.estateagency.dao.SellerDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="sellerService" class="com.estateagency.service.SellerServiceImpl">
+        <property name="sellerDao" ref="sellerDao"/>
+    </bean>
+
+    <bean id="buyerDao" class="com.estateagency.dao.BuyerDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="buyerService" class="com.estateagency.service.BuyerServiceImpl">
+        <property name="buyerDao" ref="buyerDao"/>
+    </bean>
+
+    <bean id="realtorDao" class="com.estateagency.dao.RealtorDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="realtorService" class="com.estateagency.service.RealtorServiceImpl">
+        <property name="realtorDao" ref="realtorDao"/>
+    </bean>
+
+    <bean id="flatDao" class="com.estateagency.dao.FlatDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="flatService" class="com.estateagency.service.FlatServiceImpl">
+        <property name="flatDao" ref="flatDao"/>
+    </bean>
+
+    <bean id="contractDao" class="com.estateagency.dao.ContractDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="contractService" class="com.estateagency.service.ContractServiceImpl">
+        <property name="contractDao" ref="contractDao"/>
+    </bean>
+
+    <mvc:default-servlet-handler/>
+
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.estateagency.converter.BuyerConverter"/>
+                <bean class="com.estateagency.converter.SellerConverter"/>
+                <bean class="com.estateagency.converter.FlatConverter"/>
+                <bean class="com.estateagency.converter.RealtorConverter"/>
+            </set>
+        </property>
+    </bean>
+
+</beans>
