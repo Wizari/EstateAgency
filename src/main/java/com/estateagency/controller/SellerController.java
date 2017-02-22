@@ -51,8 +51,9 @@ public class SellerController {
 
     @RequestMapping("/seller/{id}/remove")
     public String removeSeller(@PathVariable("id") int id){
-        this.sellerService.removeSeller(id);
-
+        if (!this.sellerService.removeSeller(id)) {
+            return "error";
+        }
         return "redirect:/sellers";
     }
 

@@ -9,7 +9,7 @@ public interface FlatService {
 
     void updateFlat(Flat flat);
 
-    void removeFlat(int id);
+    boolean removeFlat(int id);
 
     Flat getFlatById(int id);
 
