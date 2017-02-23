@@ -38,6 +38,7 @@ public class SellerController {
         if (result.hasErrors()) {
             model.addAttribute("seller", seller);
             model.addAttribute("listSellers", this.sellerService.listSellers());
+            model.addAttribute("error", true);
             return "sellers";
         } else {
             if (seller.getId() == 0) {
@@ -50,9 +51,12 @@ public class SellerController {
     }
 
     @RequestMapping("/seller/{id}/remove")
-    public String removeSeller(@PathVariable("id") int id){
+    public String removeSeller(@PathVariable("id") int id, Model model){
         if (!this.sellerService.removeSeller(id)) {
-            return "error";
+            model.addAttribute("seller", new Seller());
+            model.addAttribute("listSellers", this.sellerService.listSellers());
+            model.addAttribute("delete_error", true);
+            return "sellers";
         }
         return "redirect:/sellers";
     }

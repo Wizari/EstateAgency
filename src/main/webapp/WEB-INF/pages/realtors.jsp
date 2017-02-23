@@ -8,136 +8,113 @@
     <meta charset="UTF-8">
     <title>Realtors</title>
 
-    <style type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        .error {
-            color: #ff0000;
-        }
-
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<a href="../../index.jsp">Back to main menu</a>
 
-<br/>
-<br/>
+<jsp:include page="includes/header.jsp"/>
+<jsp:include page="includes/delete_error.jsp"/>
 
-<h1>Realtors list</h1>
+<div class="container" id="realtors">
 
-<c:if test="${!empty listRealtors}">
-    <table class="tg">
-        <tr>
-            <th width="80">ID</th>
-            <th width="300">fio</th>
-            <th width="120">Phone</th>
-        </tr>
-        <c:forEach items="${listRealtors}" var="realtor">
-            <tr>
-                <td>${realtor.id}</td>
-                <td><a href="/realtor/${realtor.id}" target="_blank">${realtor.fio}</a></td>
-                <td>${realtor.phone}</td>
-                <td><a href="<c:url value='/realtor/${realtor.id}/edit'/>">Edit</a></td>
-                <td><a href="<c:url value='/realtor/${realtor.id}/remove'/>">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
+    <h2>Realtors</h2>
 
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" <c:if test="${realtor.id == 0 && error != true}">class="active"</c:if>>
+            <a href="#realtors-list" aria-controls="realtors-list" role="tab" data-toggle="tab">Realtors list</a>
+        </li>
+        <li role="presentation" <c:if test="${realtor.id != 0 || error}">class="active"</c:if>>
+            <a href="#realtors-add" aria-controls="realtors-add" role="tab" data-toggle="tab">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </li>
+    </ul>
 
-<h1>Add a realtor</h1>
+    <div class="tab-content">
 
-<c:url var="addAction" value="/realtors/add"/>
+        <div role="tabpanel" class="tab-pane <c:if test="${realtor.id == 0 && error != true}">active</c:if>" id="realtors-list">
 
-<form:form action="${addAction}" commandName="realtor">
-    <table>
-        <c:if test="${realtor.id != 0}">
-            <tr>
-                <td>
-                    <form:label path="id">
-                        <spring:message text="ID"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="id" readonly="true" size="8" disabled="true"/>
-                    <form:hidden path="id"/>
-                </td>
-            </tr>
-        </c:if>
-        <tr>
-            <td>
-                <form:label path="fio">
-                    <spring:message text="fio"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="fio" required="required"/>
-            </td>
-            <td>
-                <form:errors path="fio" cssClass="error" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="phone">
-                    <spring:message text="Phone"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="phone" required="required"/>
-            </td>
-            <td>
-                <form:errors path="phone" cssClass="error" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
+            <c:if test="${!empty listRealtors}">
+                <table class="table table-hover">
+                    <tr>
+                        <th class="col-md-1">ID</th>
+                        <th class="col-md-6">FIO</th>
+                        <th class="col-md-4">Phone</th>
+                        <th class="col-md-1" colspan="2">&nbsp;</th>
+                    </tr>
+                    <c:forEach items="${listRealtors}" var="realtor">
+                        <tr>
+                            <td>${realtor.id}</td>
+                            <td><a href="/realtor/${realtor.id}" target="_blank">${realtor.fio}</a></td>
+                            <td>${realtor.phone}</td>
+                            <td>
+                                <a href="<c:url value='/realtor/${realtor.id}/edit'/>" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<c:url value='/realtor/${realtor.id}/remove'/>" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
+            
+        </div>
+        
+        <div role="tabpanel" class="tab-pane <c:if test="${realtor.id != 0 || error}">active</c:if>" id="realtors-add">
+            <c:url var="addAction" value="/realtors/add"/>
+
+            <form:form action="${addAction}" commandName="realtor">
+
                 <c:if test="${realtor.id != 0}">
-                    <input type="submit"
-                           value="<spring:message text="Edit"/>"/>
+                    <div class="control-group row">
+                        <form:label cssClass="control-label col-md-2" path="id"><spring:message text="ID"/></form:label>
+                        <div class="controls col-md-10">
+                            <form:input cssClass="form-control" path="id" readonly="true" size="8" disabled="true"/>
+                            <form:hidden path="id"/>
+                        </div>
+                    </div>
                 </c:if>
-                <c:if test="${realtor.id == 0}">
-                    <input type="submit"
-                           value="<spring:message text="Add"/>"/>
-                </c:if>
-            </td>
-        </tr>
-    </table>
-</form:form>
+
+                <div class="control-group row">
+                    <form:label cssClass="control-label col-md-2" path="fio"><spring:message text="fio"/></form:label>
+                    <div class="controls col-md-10">
+                        <form:input cssClass="form-control" path="fio" required="required"/>
+                        <form:errors path="fio" cssClass="error"/>
+                    </div>
+                </div>
+
+                <div class="control-group row">
+                    <form:label cssClass="control-label col-md-2" path="phone"><spring:message text="Phone"/></form:label>
+                    <div class="controls col-md-10">
+                        <form:input cssClass="form-control" path="phone" required="required"/>
+                        <form:errors path="phone" cssClass="error"/>
+                    </div>
+                </div>
+
+                <div class="control-group col-md-offset-2">
+                    <c:if test="${realtor.id != 0}">
+                        <input type="submit" class="btn btn-primary" value="<spring:message text="Edit"/>"/>
+                    </c:if>
+                    <c:if test="${realtor.id == 0}">
+                        <input type="submit" class="btn btn-primary" value="<spring:message text="Add"/>"/>
+                    </c:if>
+                </div>
+
+            </form:form>
+        </div>
+
+    </div>
+</div>
+
+<jsp:include page="includes/footer.jsp"/>
+
 </body>
 </html>

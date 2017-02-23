@@ -38,6 +38,7 @@ public class BuyerController {
         if (result.hasErrors()) {
             model.addAttribute("buyer", buyer);
             model.addAttribute("listBuyers", this.buyerService.listBuyers());
+            model.addAttribute("error", true);
             return "buyers";
         }
 
@@ -51,9 +52,12 @@ public class BuyerController {
     }
 
     @RequestMapping("/buyer/{id}/remove")
-    public String removeBuyer(@PathVariable("id") int id){
-        if(this.buyerService.removeBuyer(id)){
-            return "error";
+    public String removeBuyer(@PathVariable("id") int id, Model model){
+        if(!this.buyerService.removeBuyer(id)){
+            model.addAttribute("buyer", new Buyer());
+            model.addAttribute("listBuyers", this.buyerService.listBuyers());
+            model.addAttribute("delete_error", true);
+            return "buyers";
         }
 
         return "redirect:/buyers";

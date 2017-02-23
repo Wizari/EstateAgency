@@ -20,7 +20,7 @@
         <property name="url"
                   value="jdbc:mysql://localhost:3306/estate_agency"/>
         <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="password" value="1234"/>
     </bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->
@@ -93,6 +93,9 @@
     </bean>
 
     <mvc:default-servlet-handler/>
+
+    <mvc:resources location="/css/**" mapping="/css/" />
+    <mvc:resources location="/images/**" mapping="/images/" />
 
     <mvc:annotation-driven conversion-service="conversionService"/>
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">

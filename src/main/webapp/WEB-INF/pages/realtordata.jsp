@@ -9,60 +9,35 @@
     <meta charset="UTF-8">
     <title>Realtor info</title>
 
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
-
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<h1>Realtor info</h1>
 
-<table class="tg">
-    <tr>
-        <th width="80">ID</th>
-        <th width="300">FIO</th>
-        <th width="120">Phone</th>
-    </tr>
-    <tr>
-        <td>${realtor.id}</td>
-        <td>${realtor.fio}</td>
-        <td>${realtor.phone}</td>
-    </tr>
-</table>
+<jsp:include page="includes/header.jsp"/>
+
+<div class="container" id="realtors">
+
+    <h2>Realtor</h2>
+
+    <table class="table table-hover">
+        <tr>
+            <th class="col-md-1">ID</th>
+            <th class="col-md-6">FIO</th>
+            <th class="col-md-5">Phone</th>
+        </tr>
+        <tr>
+            <td>${realtor.id}</td>
+            <td>${realtor.fio}</td>
+            <td>${realtor.phone}</td>
+        </tr>
+    </table>
+</div>
+
+<jsp:include page="includes/footer.jsp"/>
+
 </body>
 </html>

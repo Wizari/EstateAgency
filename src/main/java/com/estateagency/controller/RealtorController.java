@@ -38,7 +38,7 @@ public class RealtorController {
         if (result.hasErrors()) {
             model.addAttribute("realtor", realtor);
             model.addAttribute("listRealtors", this.realtorService.listRealtors());
-
+            model.addAttribute("error", true);
             return "realtors";
         }
 
@@ -52,9 +52,12 @@ public class RealtorController {
     }
 
     @RequestMapping("/realtor/{id}/remove")
-    public String removeRealtor(@PathVariable("id") int id){
-        if (this.realtorService.removeRealtor(id)) {
-            return "error";
+    public String removeRealtor(@PathVariable("id") int id, Model model){
+        if (!this.realtorService.removeRealtor(id)) {
+            model.addAttribute("realtor", new Realtor());
+            model.addAttribute("listRealtors", this.realtorService.listRealtors());
+            model.addAttribute("delete_error", true);
+            return "realtors";
         }
         return "redirect:/realtors";
     }
