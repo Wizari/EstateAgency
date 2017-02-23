@@ -25,12 +25,14 @@
 
         <div class="active item item-1">
             <div class="carousel-caption">
+                <h1>Estate agency</h1>
                 <h3>Done by Vladislav Voskubenko</h3>
             </div>
         </div>
 
         <div class="item item-2">
             <div class="carousel-caption">
+                <h1>Estate agency</h1>
                 <h3>Done by Vladislav Voskubenko</h3>
             </div>
         </div>
