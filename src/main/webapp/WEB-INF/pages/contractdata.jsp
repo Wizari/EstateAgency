@@ -9,70 +9,45 @@
     <meta charset="UTF-8">
     <title>Contract info</title>
 
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
-
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<h1>Contract info</h1>
 
-<table class="tg">
-    <tr>
-        <th width="80">ID</th>
-        <th width="120">Seller</th>
-        <th width="120">Buyer</th>
-        <th width="120">Realtor</th>
-        <th width="120">Flat</th>
-        <th width="120">Comission</th>
-        <th width="120">Total price</th>
-        <th width="120">Purchase date</th>
-    </tr>
-    <tr>
-        <td>${contract.id}</td>
-        <td><a href="/seller/${contract.seller.id}">${contract.seller.FIO}</a></td>
-        <td><a href="/buyer/${contract.buyer.id}">${contract.buyer.FIO}</a></td>
-        <td><a href="/realtor/${contract.realtor.id}">${contract.realtor.FIO}</a></td>
-        <td><a href="/flat/${contract.flat.id}">${contract.flat.district}, ${contract.flat.address}</a></td>
-        <td>${contract.comission}</td>
-        <td>${contract.totalPrice}</td>
-        <td>${contract.purchaseDate}</td>
-    </tr>
-</table>
+<jsp:include page="includes/header.jsp"/>
+
+<div class="container" id="contracts">
+
+    <h2>Contract</h2>
+
+    <table class="table table-hover">
+        <tr>
+            <th class="col-md-1">ID</th>
+            <th class="col-md-2">Seller</th>
+            <th class="col-md-2">Buyer</th>
+            <th class="col-md-2">Realtor</th>
+            <th class="col-md-1">Flat</th>
+            <th class="col-md-1">Comission</th>
+            <th class="col-md-1">Total price</th>
+            <th class="col-md-2">Purchase date</th>
+        </tr>
+        <tr>
+            <td>${contract.id}</td>
+            <td><a href="/seller/${contract.seller.id}">${contract.seller.FIO}</a></td>
+            <td><a href="/buyer/${contract.buyer.id}">${contract.buyer.FIO}</a></td>
+            <td><a href="/realtor/${contract.realtor.id}">${contract.realtor.FIO}</a></td>
+            <td><a href="/flat/${contract.flat.id}">${contract.flat.district}, ${contract.flat.address}</a></td>
+            <td>${contract.comission}</td>
+            <td>${contract.totalPrice}</td>
+            <td>${contract.purchaseDate}</td>
+        </tr>
+    </table>
+</div>
+
+<jsp:include page="includes/footer.jsp"/>
+
 </body>
 </html>

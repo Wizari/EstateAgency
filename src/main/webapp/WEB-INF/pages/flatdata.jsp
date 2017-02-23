@@ -9,70 +9,45 @@
     <meta charset="UTF-8">
     <title>Flat info</title>
 
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
-
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<h1>Flat info</h1>
 
-<table class="tg">
-    <tr>
-        <th width="80">ID</th>
-        <th width="120">Rooms</th>
-        <th width="120">Area</th>
-        <th width="120">Floor</th>
-        <th width="120">District</th>
-        <th width="120">Price</th>
-        <th width="120">Address</th>
-        <th width="120">Purchased</th>
-    </tr>
-    <tr>
-        <td><a href="/flat/${flat.id}" target="_blank">${flat.id}</a></td>
-        <td>${flat.rooms}</td>
-        <td>${flat.area}</td>
-        <td>${flat.floor}</td>
-        <td>${flat.district}</td>
-        <td>${flat.price}</td>
-        <td>${flat.address}</td>
-        <td>${flat.purchased ? "Yes" : "No"}</td>
-    </tr>
-</table>
+<jsp:include page="includes/header.jsp"/>
+
+<div class="container" id="flats">
+
+    <h2>Flat</h2>
+
+    <table class="table table-hover">
+        <tr>
+            <th class="col-md-1">ID</th>
+            <th class="col-md-1">Rooms</th>
+            <th class="col-md-1">Area</th>
+            <th class="col-md-1">Floor</th>
+            <th class="col-md-2">District</th>
+            <th class="col-md-2">Price</th>
+            <th class="col-md-3">Address</th>
+            <th class="col-md-2">Purchased</th>
+        </tr>
+        <tr>
+            <td>${flat.id}</td>
+            <td>${flat.rooms}</td>
+            <td>${flat.area}</td>
+            <td>${flat.floor}</td>
+            <td>${flat.district}</td>
+            <td>${flat.price}</td>
+            <td>${flat.address}</td>
+            <td>${flat.purchased ? "Yes" : "No"}</td>
+        </tr>
+    </table>
+</div>
+
+<jsp:include page="includes/footer.jsp"/>
+
 </body>
 </html>

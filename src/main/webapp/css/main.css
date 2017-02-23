@@ -1,0 +1,88 @@
+
+body, html {
+    height: 100%;
+    background: url("/images/bg.jpg") no-repeat fixed center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+form {
+    padding: 10px;
+}
+
+#buyers,
+#sellers,
+#flats,
+#realtors,
+#contracts {
+    margin-top: 200px;
+    min-height: 700px;
+    padding: 20px;
+    /*background-color: #f1f3f2;*/
+    /*-webkit-border-radius: 10px;*/
+    /*-moz-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+}
+
+.error {
+    color: #ff0000;
+}
+
+.control-group .controls {
+    margin: 5px 0;
+}
+
+.control-group .control-label {
+    margin-bottom: 0;
+    padding-top: 7px;
+    text-align: right;
+}
+
+.control-group input[type=submit] {
+    margin-top: 20px;
+}
+
+.glyphicon {
+    line-height: 1.42857;
+}
+
+#index-carousel .item{
+    height: 100%;
+    background: #333 no-repeat fixed center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#index-carousel .item-1 {
+    background-image: url("/images/01.jpg");
+}
+
+#index-carousel .item-2 {
+    background-image: url("/images/02.jpg");
+}
+
+
+#index-carousel .carousel-caption {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    right: auto;
+    bottom: auto;
+    color: #000000;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    text-align: left;
+}
+
+#index-carousel .carousel-caption h3 {
+    font-weight: bold;
+}
+
+#footer {
+    text-align: right;
+    padding: 10px;
+    font-weight: bold;
+}

@@ -38,6 +38,7 @@ public class BuyerController {
         if (result.hasErrors()) {
             model.addAttribute("buyer", buyer);
             model.addAttribute("listBuyers", this.buyerService.listBuyers());
+            model.addAttribute("error", true);
             return "buyers";
         }
 
