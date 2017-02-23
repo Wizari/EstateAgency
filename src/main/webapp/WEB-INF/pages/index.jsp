@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<jsp:include page="WEB-INF/pages/includes/header.jsp"/>
+<jsp:include page="includes/header.jsp"/>
 
 <div id="index-carousel" class="carousel slide" data-interval="3000" data-ride="carousel">
 

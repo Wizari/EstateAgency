@@ -17,16 +17,17 @@
 <body>
 
 <jsp:include page="includes/header.jsp"/>
+<jsp:include page="includes/delete_error.jsp"/>
 
 <div class="container" id="realtors">
 
     <h2>Realtors</h2>
 
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" <c:if test="${realtor.id == 0}">class="active"</c:if>>
+        <li role="presentation" <c:if test="${realtor.id == 0 && error != true}">class="active"</c:if>>
             <a href="#realtors-list" aria-controls="realtors-list" role="tab" data-toggle="tab">Realtors list</a>
         </li>
-        <li role="presentation" <c:if test="${realtor.id != 0}">class="active"</c:if>>
+        <li role="presentation" <c:if test="${realtor.id != 0 || error}">class="active"</c:if>>
             <a href="#realtors-add" aria-controls="realtors-add" role="tab" data-toggle="tab">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
@@ -35,7 +36,7 @@
 
     <div class="tab-content">
 
-        <div role="tabpanel" class="tab-pane <c:if test="${realtor.id == 0}">active</c:if>" id="realtors-list">
+        <div role="tabpanel" class="tab-pane <c:if test="${realtor.id == 0 && error != true}">active</c:if>" id="realtors-list">
 
             <c:if test="${!empty listRealtors}">
                 <table class="table table-hover">
@@ -67,7 +68,7 @@
             
         </div>
         
-        <div role="tabpanel" class="tab-pane <c:if test="${realtor.id != 0}">active</c:if>" id="realtors-add">
+        <div role="tabpanel" class="tab-pane <c:if test="${realtor.id != 0 || error}">active</c:if>" id="realtors-add">
             <c:url var="addAction" value="/realtors/add"/>
 
             <form:form action="${addAction}" commandName="realtor">

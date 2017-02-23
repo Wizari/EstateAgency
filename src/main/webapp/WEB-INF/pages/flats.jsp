@@ -17,16 +17,17 @@
 <body>
 
 <jsp:include page="includes/header.jsp"/>
+<jsp:include page="includes/delete_error.jsp"/>
 
 <div class="container" id="flats">
 
     <h2>Flats</h2>
 
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" <c:if test="${flat.id == 0}">class="active"</c:if>>
+        <li role="presentation" <c:if test="${flat.id == 0 && error != true}">class="active"</c:if>>
             <a href="#flats-list" aria-controls="flats-list" role="tab" data-toggle="tab">Flats list</a>
         </li>
-        <li role="presentation" <c:if test="${flat.id != 0}">class="active"</c:if>>
+        <li role="presentation" <c:if test="${flat.id != 0 || error}">class="active"</c:if>>
             <a href="#flats-add" aria-controls="flats-add" role="tab" data-toggle="tab">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
@@ -35,7 +36,7 @@
 
     <div class="tab-content">
         
-        <div role="tabpanel" class="tab-pane <c:if test="${flat.id == 0}">active</c:if>" id="flats-list">
+        <div role="tabpanel" class="tab-pane <c:if test="${flat.id == 0 && error != true}">active</c:if>" id="flats-list">
             <c:if test="${!empty listFlats}">
                 <table class="table table-hover">
                     <tr>
@@ -75,7 +76,7 @@
             </c:if>
         </div>
         
-        <div role="tabpanel" class="tab-pane <c:if test="${flat.id != 0}">active</c:if>" id="flats-add">
+        <div role="tabpanel" class="tab-pane <c:if test="${flat.id != 0 || error}">active</c:if>" id="flats-add">
             <c:url var="addAction" value="/flats/add"/>
 
             <form:form action="${addAction}" commandName="flat">

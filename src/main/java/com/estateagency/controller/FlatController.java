@@ -41,7 +41,7 @@ public class FlatController {
         if (result.hasErrors()) {
             model.addAttribute("flat",flat);
             model.addAttribute("listFlats", this.flatService.listFlats());
-
+            model.addAttribute("error", true);
             return "flats";
         }
 
@@ -55,9 +55,12 @@ public class FlatController {
     }
 
     @RequestMapping("/flat/{id}/remove")
-    public String removeFlat(@PathVariable("id") int id){
+    public String removeFlat(@PathVariable("id") int id, Model model){
         if (!this.flatService.removeFlat(id)) {
-            return "error";
+            model.addAttribute("flat", new Flat());
+            model.addAttribute("listFlats", this.flatService.listFlats());
+            model.addAttribute("delete_error", true);
+            return "flats";
         }
         return "redirect:/flats";
     }

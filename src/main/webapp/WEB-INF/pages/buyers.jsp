@@ -17,11 +17,11 @@
 <body>
 
 <jsp:include page="includes/header.jsp"/>
+<jsp:include page="includes/delete_error.jsp"/>
 
 <div class="container" id="buyers">
 
     <h2>Buyers</h2>
-
     <ul class="nav nav-tabs" role="tablist">
 
         <li role="presentation" <c:if test="${buyer.id == 0 && error != true}">class="active"</c:if>>

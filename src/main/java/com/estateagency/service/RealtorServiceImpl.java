@@ -35,7 +35,7 @@ public class RealtorServiceImpl implements RealtorService {
     @Override
     @Transactional
     public boolean removeRealtor(int id) {
-        List<Contract> contracts = this.contractDao.getContractByFlat(id);
+        List<Contract> contracts = this.contractDao.getContractByRealtor(id);
         if (contracts.size() > 0) {
             return false;
         }

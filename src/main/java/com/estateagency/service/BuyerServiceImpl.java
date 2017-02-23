@@ -36,7 +36,7 @@ public class BuyerServiceImpl implements BuyerService {
     @Override
     @Transactional
     public boolean removeBuyer(int id) {
-        List<Contract> contracts = this.contractDao.getContractByFlat(id);
+        List<Contract> contracts = this.contractDao.getContractByBuyer(id);
         if (contracts.size() > 0) {
             return false;
         }
